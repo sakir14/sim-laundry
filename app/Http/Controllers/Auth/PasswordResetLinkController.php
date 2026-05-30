@@ -33,7 +33,14 @@ class PasswordResetLinkController extends Controller
         if (app()->environment('production') && config('mail.default') === 'log') {
             return back()->withInput($request->only('email'))
                 ->withErrors([
-                    'email' => 'Email reset password belum dikonfigurasi. Atur SMTP di Railway terlebih dahulu.',
+                    'email' => 'Email reset password belum dikonfigurasi. Atur layanan email API seperti Resend di Railway terlebih dahulu.',
+                ]);
+        }
+
+        if (app()->environment('production') && config('mail.default') === 'resend' && blank(config('services.resend.key'))) {
+            return back()->withInput($request->only('email'))
+                ->withErrors([
+                    'email' => 'Email reset password belum dikonfigurasi. Atur RESEND_API_KEY di Railway terlebih dahulu.',
                 ]);
         }
 
@@ -46,7 +53,7 @@ class PasswordResetLinkController extends Controller
 
             return back()->withInput($request->only('email'))
                 ->withErrors([
-                    'email' => 'Email reset password belum bisa dikirim. Periksa kembali konfigurasi SMTP.',
+                    'email' => 'Email reset password belum bisa dikirim. Railway tidak dapat memakai Gmail SMTP pada plan ini. Gunakan layanan email API seperti Resend.',
                 ]);
         }
 
