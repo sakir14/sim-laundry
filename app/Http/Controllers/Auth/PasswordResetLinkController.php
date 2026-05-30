@@ -53,7 +53,7 @@ class PasswordResetLinkController extends Controller
 
             return back()->withInput($request->only('email'))
                 ->withErrors([
-                    'email' => 'Email reset password belum bisa dikirim. Railway tidak dapat memakai Gmail SMTP pada plan ini. Gunakan layanan email API seperti Resend.',
+                    'email' => 'Email reset password belum bisa dikirim. Periksa API key dan domain pengirim di layanan email.',
                 ]);
         }
 
