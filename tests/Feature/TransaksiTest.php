@@ -172,3 +172,45 @@ test('kasir can search transaksi from daftar cucian masuk', function () {
         ->assertSee('Ubah Status')
         ->assertDontSee('TRX-CARI-0002');
 });
+
+test('courier transaksi uses siap dikirim label when ready', function () {
+    $user = User::factory()->create();
+
+    $layanan = Layanan::create([
+        'nama_layanan' => 'Cuci Kiloan',
+        'harga' => 10000,
+        'satuan' => 'kg',
+    ]);
+
+    $pelanggan = Pelanggan::create([
+        'nama_pelanggan' => 'Sasieng',
+        'no_hp' => '083333333333',
+        'alamat' => 'Jl. Melati',
+    ]);
+
+    $transaksi = Transaksi::create([
+        'no_nota' => 'TRX-KIRIM-0001',
+        'pelanggan_id' => $pelanggan->id,
+        'layanan_id' => $layanan->id,
+        'user_id' => $user->id,
+        'berat' => 3,
+        'biaya_ongkir' => 4999,
+        'total_bayar' => 34999,
+        'status_pembayaran' => 'belum_lunas',
+        'status_pesanan' => 'selesai',
+        'jenis_pengambilan' => 'antar_jemput',
+        'alamat_pengiriman' => 'Jl. Melati',
+    ]);
+
+    expect($transaksi->fresh()->status_pesanan_label)->toBe('Siap Dikirim');
+
+    $this->actingAs($user)
+        ->get(route('transaksi.show', $transaksi))
+        ->assertOk()
+        ->assertSee('Siap Dikirim')
+        ->assertDontSee('Siap Diambil');
+
+    $this->get(route('cek.status', ['nota' => $transaksi->no_nota]))
+        ->assertOk()
+        ->assertSee('Siap Dikirim');
+});

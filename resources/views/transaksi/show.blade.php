@@ -31,6 +31,7 @@
             @php
                 $rincian = $transaksi->rincian_layanan;
                 $subtotalLayanan = $rincian->sum('subtotal');
+                $statusSelesaiLabel = $transaksi->status_selesai_label;
                 $statusAkhirValue = $transaksi->butuh_kurir ? 'diantar' : 'diambil';
                 $statusAkhirLabel = $transaksi->butuh_kurir ? 'Sudah Dikirim' : 'Sudah Diambil';
             @endphp
@@ -163,7 +164,7 @@
                                     <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Status Cucian</label>
                                     <select name="status_pesanan" class="input-modern text-sm">
                                         <option value="proses" {{ $transaksi->status_pesanan == 'proses' ? 'selected' : '' }}>Sedang Dicuci</option>
-                                        <option value="selesai" {{ $transaksi->status_pesanan == 'selesai' ? 'selected' : '' }}>Siap Diambil</option>
+                                        <option value="selesai" {{ $transaksi->status_pesanan == 'selesai' ? 'selected' : '' }}>{{ $statusSelesaiLabel }}</option>
                                         <option value="{{ $statusAkhirValue }}" {{ $transaksi->status_pesanan == $statusAkhirValue ? 'selected' : '' }}>{{ $statusAkhirLabel }}</option>
                                     </select>
                                 </div>

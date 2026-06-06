@@ -89,6 +89,35 @@ class Transaksi extends Model
         };
     }
 
+    public function getStatusSelesaiLabelAttribute(): string
+    {
+        return $this->butuh_kurir ? 'Siap Dikirim' : 'Siap Diambil';
+    }
+
+    public function getStatusPesananLabelAttribute(): string
+    {
+        return match (strtolower((string) $this->status_pesanan)) {
+            'proses' => 'Sedang Dicuci',
+            'selesai' => $this->status_selesai_label,
+            'diambil' => 'Sudah Diambil',
+            'diantar' => 'Sudah Dikirim',
+            default => ucwords(str_replace('_', ' ', (string) $this->status_pesanan)),
+        };
+    }
+
+    public function getStatusPesananDeskripsiAttribute(): string
+    {
+        return match (strtolower((string) $this->status_pesanan)) {
+            'proses' => 'Cucian kamu sedang dalam proses pencucian, harap bersabar.',
+            'selesai' => $this->butuh_kurir
+                ? 'Cucian kamu sudah bersih dan siap dikirim oleh kurir.'
+                : 'Cucian kamu sudah bersih dan siap diambil.',
+            'diambil' => 'Cucian sudah diserahkan. Terima kasih telah mempercayai kami!',
+            'diantar' => 'Cucian sudah dikirim ke alamatmu. Terima kasih telah mempercayai kami!',
+            default => '',
+        };
+    }
+
     // 4. Relasi ke tabel User (Untuk mencatat Kasir yang melayani)
     public function user()
     {

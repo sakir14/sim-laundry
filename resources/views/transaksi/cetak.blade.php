@@ -289,6 +289,7 @@
         <div class="struk-body">
             @php
                 $rincian = $transaksi->rincian_layanan;
+                $statusPesananLabel = $transaksi->status_pesanan_label;
             @endphp
 
             <!-- Nota Info -->
@@ -362,7 +363,7 @@
                     {{ $transaksi->status_pembayaran === 'lunas' ? ' LUNAS' : ' BELUM LUNAS' }}
                 </div>
                 <div class="badge badge-status">
-                     {{ strtoupper($transaksi->status_pesanan) }}
+                     {{ strtoupper($statusPesananLabel) }}
                 </div>
             </div>
         </div>

@@ -373,21 +373,10 @@
             $steps = ['proses', 'selesai', $butuhKurir ? 'diantar' : 'diambil'];
             $stepIdx = array_search($sp, $steps);
 
-            $statusLabel = [
-                'proses'   => 'Sedang Dicuci ',
-                'selesai'  => 'Siap Diambil ',
-                'diambil'  => 'Sudah Diambil ',
-                'diantar'  => 'Sudah Dikirim ',
-            ][$sp] ?? ucfirst($sp);
+            $statusLabel = $transaksi->status_pesanan_label;
+            $statusDesc = $transaksi->status_pesanan_deskripsi;
 
-            $statusDesc = [
-                'proses'   => 'Cucian kamu sedang dalam proses pencucian, harap bersabar.',
-                'selesai'  => 'Yeay! Cucian kamu sudah bersih dan siap diambil.',
-                'diambil'  => 'Cucian sudah diserahkan. Terima kasih telah mempercayai kami!',
-                'diantar'  => 'Cucian sedang dalam perjalanan menuju alamatmu.',
-            ][$sp] ?? '';
-
-            $stepLabels = ['Dicuci', 'Selesai', $butuhKurir ? 'Diantar' : 'Diambil'];
+            $stepLabels = ['Dicuci', $butuhKurir ? 'Siap Dikirim' : 'Siap Diambil', $butuhKurir ? 'Dikirim' : 'Diambil'];
             $rincian = $transaksi->rincian_layanan;
 
             $statusIcons = [

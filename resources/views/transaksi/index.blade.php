@@ -144,7 +144,7 @@
     @php
         $statusPesananLabels = [
             'proses' => 'Sedang Dicuci',
-            'selesai' => 'Siap Diambil',
+            'selesai' => 'Siap Diambil/Dikirim',
             'diambil' => 'Sudah Diambil',
             'diantar' => 'Sudah Dikirim',
         ];
@@ -258,7 +258,7 @@
                                         @php $sp = strtolower($t->status_pesanan); @endphp
                                         <span class="{{ $sp === 'proses' ? 'badge-proses' : ($sp === 'selesai' ? 'badge-selesai' : 'badge-diambil') }}">
                                             <span class="w-1.5 h-1.5 rounded-full {{ $sp === 'proses' ? 'bg-amber-500' : ($sp === 'selesai' ? 'bg-emerald-500' : 'bg-blue-500') }}"></span>
-                                            {{ $statusPesananLabels[$sp] ?? ucfirst($t->status_pesanan) }}
+                                            {{ $t->status_pesanan_label }}
                                         </span>
                                         <span class="{{ $t->status_pembayaran === 'lunas' ? 'badge-lunas' : 'badge-belum' }}">
                                             <span class="w-1.5 h-1.5 rounded-full {{ $t->status_pembayaran === 'lunas' ? 'bg-emerald-500' : 'bg-red-500' }}"></span>
