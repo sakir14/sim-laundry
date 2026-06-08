@@ -193,8 +193,8 @@
                                     Detail Kurir
                                 </p>
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Alamat Kurir</label>
-                                    <textarea name="alamat_pengiriman" id="alamat_pengiriman" rows="2" class="input-modern resize-none" placeholder="Alamat antar / jemput kurir">{{ old('alamat_pengiriman') }}</textarea>
+                                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Alamat Tujuan</label>
+                                    <textarea name="alamat_pengiriman" id="alamat_pengiriman" rows="2" class="input-modern resize-none" placeholder="Alamat tujuan antar / jemput">{{ old('alamat_pengiriman') }}</textarea>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Biaya Ongkir (Rp)</label>

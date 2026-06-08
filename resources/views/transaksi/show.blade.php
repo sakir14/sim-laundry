@@ -110,7 +110,7 @@
                             </div>
                             @if($transaksi->butuh_kurir && $transaksi->alamat_pengiriman)
                             <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mt-2">
-                                <p class="text-xs font-bold text-amber-600 mb-1">Alamat Kurir:</p>
+                                <p class="text-xs font-bold text-amber-600 mb-1">Alamat Tujuan:</p>
                                 <p class="text-sm text-slate-700">{{ $transaksi->alamat_pengiriman }}</p>
                             </div>
                             @endif
